@@ -103,13 +103,20 @@ module Caches
       end
     end
 
+    def event?
+      ['event cache', 'cache in trash out event', 'lost and found event cache'].detect{|event| event == type.downcase}
+    end
+
+    def attended_event?(log)
+      event? && log.type.downcase == 'attended'
+    end
+
     def found
       @found ||= begin
         date = nil
 
         logs.each {|log|
-          if log.type.downcase == 'found it' or
-              type.downcase == 'event cache' && log.type.downcase == 'attended'
+          if log.type.downcase == 'found it' or attended_event?(log)
             date = log.date
             break
           end

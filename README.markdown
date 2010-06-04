@@ -2,10 +2,9 @@
 
 A Ruby program that generates HTML statistics of your [Geocaching][gc] activity.
 
-Samples: [my stats][agorf], [yannisp stats][yannisp] (fellow geocacher)
+Sample: [my stats][agorf]
 
 [agorf]: http://agorf.github.com/gcstats/agorf.html
-[yannisp]: http://agorf.github.com/gcstats/yannisp.html
 
 ## Use ##
 
@@ -15,7 +14,7 @@ Assuming your Pocket Query file is _3627915.zip_, issue:
 
     ruby gcstats.rb 3627915.zip
 
-Open _3627915.html_ to view your statistics.  It it also possible to specify the output filename:
+Open _3627915.html_ to view your statistics.  It is also possible to specify the output filename:
 
     ruby gcstats.rb 3627915.zip agorf.html
 

@@ -172,6 +172,28 @@
 </table>
 <%# }}} %>
 
+<%# {{{ month/day combinations %>
+<table id="year_month_combinations" class="c">
+  <caption>Year/Month Combinations</caption>
+
+  <tr>
+    <th>Y/M</th>
+	  <% (0..11).each {|i| %>
+      <th><%= Date::ABBR_MONTHNAMES[i + 1] %></th>
+    <% } %>
+    <th>Total</th>
+  </tr>
+  <% finds_by_year_month.keys.sort.each do |year| %>
+  <tr>
+    <th><%= year %></th>
+    <% finds_by_year_month[year].keys.sort.each {|month| %>
+      <td><%= (n = finds_by_year_month[year][month]) < 1 ? "-" : n %></td>
+    <% } %>
+    <td class="total"><%= finds_by_year_month[year].values.inject{|result, element| result + element } %></td>
+  </tr>
+  <% end %>
+<%# }}} %>
+
 <%# {{{ finds by country %>
 <table>
   <caption>Finds by Country</caption>

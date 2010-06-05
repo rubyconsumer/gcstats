@@ -44,7 +44,6 @@ module Helpers
   def finds_by_date
     @finds_by_date ||= begin
       finds = {}
-
       @caches.each {|cache|
         begin
           finds[cache.found] += 1
@@ -54,6 +53,16 @@ module Helpers
       }
 
       finds
+    end
+  end
+  
+  def finds_by_published_date
+    @finds_by_published_date ||= begin
+      pubdate = Hash.new(0)
+      @caches.each {|cache|
+        pubdate[cache.published] += 1
+      }
+      pubdate
     end
   end
 
@@ -94,6 +103,24 @@ module Helpers
         finds[year] ||= 0
       }
 
+      finds
+    end
+  end
+
+  def init_year_month
+    year_month = {}
+    (2000..Time.new.year).each {|year|
+      year_month.merge!( {year => {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0, 12 => 0}} )
+    }
+    year_month
+  end
+
+  def finds_by_year_month
+    @finds_by_year_month ||= begin
+      finds = init_year_month
+      finds_by_published_date.each {|date, finds_on_date|
+        finds[date.year][date.month] += finds_on_date
+      }
       finds
     end
   end

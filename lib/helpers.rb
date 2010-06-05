@@ -115,16 +115,6 @@ module Helpers
     year_month
   end
 
-  def finds_by_year_month
-    @finds_by_year_month ||= begin
-      finds = init_year_month
-      finds_by_published_date.each {|date, finds_on_date|
-        finds[date.year][date.month] += finds_on_date
-      }
-      finds
-    end
-  end
-
   def finds_by_size
     finds = {}
 
@@ -151,6 +141,16 @@ module Helpers
     }
 
     finds.to_a.sort {|x, y| y[1] <=> x[1] }
+  end
+
+  def year_month_combinations
+    @finds_by_year_month ||= begin
+      finds = init_year_month
+      finds_by_published_date.each {|date, finds_on_date|
+        finds[date.year][date.month] += finds_on_date
+      }
+      finds
+    end
   end
 
   def difficulty_terrain_combinations

@@ -183,13 +183,13 @@
     <% } %>
     <th>Total</th>
   </tr>
-  <% finds_by_year_month.keys.sort.each do |year| %>
+  <% year_month_combinations.keys.sort.each do |year| %>
   <tr>
     <th><%= year %></th>
-    <% finds_by_year_month[year].keys.sort.each {|month| %>
-      <td><%= (n = finds_by_year_month[year][month]) < 1 ? "-" : n %></td>
+    <% year_month_combinations[year].keys.sort.each {|month| %>
+      <td <% if year_month_combinations[year][month] > 0 %>class="checked"<% end %>><%= (n = year_month_combinations[year][month]) < 1 ? "-" : n %></td>
     <% } %>
-    <td class="total"><%= finds_by_year_month[year].values.inject{|result, element| result + element } %></td>
+    <td class="total"><%= year_month_combinations[year].values.inject{|result, element| result + element } %></td>
   </tr>
   <% end %>
 <%# }}} %>

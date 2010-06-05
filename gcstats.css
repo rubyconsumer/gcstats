@@ -40,6 +40,10 @@ caption, th, td {
     background-color: #ddd;
 }
 
+.checked {
+    background-color: #C0C080;
+}
+
 .b {
     font-weight: bold;
 }
